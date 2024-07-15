@@ -1,5 +1,5 @@
 import { Chip } from "@mui/material";
-import { paths } from "../../../schema";
+import { paths } from "../../../../schema";
 
 type Props = {
   status: paths["/catalog-items/{item_uuid}"]["get"]["responses"]["200"]["content"]["application/json"]["status"];
@@ -23,10 +23,11 @@ const generateStatusColors = (status: Props["status"]) => {
     case "CAPTURE_FAILED":
       return "error";
     case "PROCESSING":
+      return "warning";
     case "READY":
-      return "info";
-    case "NEEDS_CAPTURE":
       return "success";
+    case "NEEDS_CAPTURE":
+      return "info";
   }
 };
 
