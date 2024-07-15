@@ -1,6 +1,7 @@
 import { useGetCatalogueItems } from "@/hooks/useGetCatalogueItems";
 import Container from "@mui/material/Container";
 import { CatalogueItem } from "./catalogueItem";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export const CatalogueItemsList = () => {
   const { isPending, isError, error, data } = useGetCatalogueItems();
@@ -15,11 +16,11 @@ export const CatalogueItemsList = () => {
 
   return (
     <Container>
-      <div>
+      <Grid container spacing={2}>
         {data?.items.map((item) => (
           <CatalogueItem item={item} key={item.uuid} />
         ))}
-      </div>
+      </Grid>
     </Container>
   );
 };
