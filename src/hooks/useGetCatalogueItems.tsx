@@ -1,19 +1,19 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
+import { paths } from '../../schema';
 
-async function fetchCatalogueItems() {
+const fetchCatalogueItems = async (): Promise<paths['/catalog-items']['get']['responses']['200']['content']['application/json']> => {
   const url = "/api/catalog-items?limit=50&offset=0";
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    console.log(json);
-  } catch (error) {
-    console.error(error.message);
-  }
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`)
+      }
+      return response.json()
+    })
+    .catch(error => {
+      return error
+    })
 }
 export const useGetCatalogueItems = () => {
   const { isPending, isError, data, error } = useQuery({

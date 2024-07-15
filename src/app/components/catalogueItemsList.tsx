@@ -9,9 +9,10 @@ export const CatalogueItemsList = () => {
   }
 
   if (isError) {
-    return <p>{error}</p>
+    return <p>{error?.name}</p>
   }
 
-  return <p></p>
+
+  return <>{data?.items.map(item => <p>{item.name}</p>)}</>
 
 }
