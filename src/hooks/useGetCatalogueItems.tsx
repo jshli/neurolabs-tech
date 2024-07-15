@@ -1,7 +1,8 @@
+'use client'
 import { useQuery } from '@tanstack/react-query'
 
 async function fetchCatalogueItems() {
-  const url = "https://staging.api.neurolabs.ai/v2/catalog-items?limit=50&offset=0";
+  const url = "/api/catalog-items?limit=50&offset=0";
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -14,8 +15,16 @@ async function fetchCatalogueItems() {
     console.error(error.message);
   }
 }
-export const { isPending, isError, data, error } = useQuery({
-  queryKey: ['catalogueItems'],
-  queryFn: fetchCatalogueItems,
-})
+export const useGetCatalogueItems = () => {
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ['catalogueItems'],
+    queryFn: fetchCatalogueItems,
+  })
 
+  return {
+    isPending,
+    isError,
+    data,
+    error
+  }
+}
