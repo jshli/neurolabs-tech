@@ -18,6 +18,7 @@ export const useGetIRTaskById = (id: IRTask["uuid"]) => {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["ir-task", id],
     queryFn: () => fetchIRTaskById(id),
+    enabled: !!id,
   });
 
   return {

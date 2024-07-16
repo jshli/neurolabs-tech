@@ -1,6 +1,6 @@
 "use client";
-import { IRTasksList } from "./components/IRTasksList/IRTasksList";
 import { Container, Typography } from "@mui/material";
+import { IRTasksList } from "./components/IRTasksList/IRTasksList";
 
 export const Page = () => {
   return (

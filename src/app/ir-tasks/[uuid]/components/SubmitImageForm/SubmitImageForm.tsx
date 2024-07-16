@@ -1,5 +1,7 @@
+"use client";
 import { usePostIRImage } from "@/hooks/usePostIRImage";
 import { Box, Button, Grid, SvgIcon, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
@@ -7,19 +9,24 @@ type Props = {
 };
 export const SubmitImageForm = ({ taskUUID }: Props) => {
   const {
-    register,
     control,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<{ images: File[] }>();
-  const { isPending, mutate } = usePostIRImage(taskUUID);
+  const { isPending, mutateAsync, isSuccess } = usePostIRImage(taskUUID);
+  const { push } = useRouter();
 
   const watchImages = watch("images");
 
-  const onSubmit: SubmitHandler<{ images: File[] }> = (data, event) => {
+  const onSubmit: SubmitHandler<{ images: File[] }> = async (data, event) => {
     event?.preventDefault();
-    mutate(data.images);
+    await mutateAsync(data.images).then(() => {
+      if (isSuccess) {
+        console.log("success", isSuccess);
+        push(`/ir-tasks`);
+      }
+    });
   };
 
   return (

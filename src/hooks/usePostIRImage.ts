@@ -30,8 +30,8 @@ const postIRImage = async ({
 };
 
 export const usePostIRImage = (taskUUID: string) => {
-  const { mutate, mutateAsync, isPending } = useMutation({
+  const { mutateAsync, isSuccess, isPending } = useMutation({
     mutationFn: (images: File[]) => postIRImage({ taskUUID, images }),
   });
-  return { mutate, mutateAsync, isPending };
+  return { mutateAsync, isPending, isSuccess };
 };
