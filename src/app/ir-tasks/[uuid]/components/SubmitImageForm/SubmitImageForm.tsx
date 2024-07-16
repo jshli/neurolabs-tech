@@ -8,24 +8,15 @@ type Props = {
   taskUUID: string;
 };
 export const SubmitImageForm = ({ taskUUID }: Props) => {
-  const {
-    control,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<{ images: File[] }>();
-  const { isPending, mutateAsync, isSuccess } = usePostIRImage(taskUUID);
-  const { push } = useRouter();
+  const { control, handleSubmit, watch, reset } = useForm<{ images: File[] }>();
+  const { isPending, mutateAsync } = usePostIRImage(taskUUID);
 
   const watchImages = watch("images");
 
   const onSubmit: SubmitHandler<{ images: File[] }> = async (data, event) => {
     event?.preventDefault();
     await mutateAsync(data.images).then(() => {
-      if (isSuccess) {
-        console.log("success", isSuccess);
-        push(`/ir-tasks`);
-      }
+      reset();
     });
   };
 
@@ -84,15 +75,17 @@ export const SubmitImageForm = ({ taskUUID }: Props) => {
                   </SvgIcon>
                 }
               >
-                Upload
+                Upload a new image to process
               </Button>
             </label>
           </>
         )}
       />
-      <Button variant="contained" type="submit">
-        {isPending ? "Submitting..." : "Submit"}
-      </Button>
+      <div className="mb-8">
+        <Button variant="contained" type="submit">
+          {isPending ? "Submitting..." : "Submit"}
+        </Button>
+      </div>
     </form>
   );
 };

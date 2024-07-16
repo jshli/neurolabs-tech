@@ -4,6 +4,7 @@ import {
   ImageList,
   ImageListItem,
   ImageListItemBar,
+  Typography,
 } from "@mui/material";
 
 type Props = {
@@ -21,26 +22,31 @@ export const ResultsList = ({ taskId }: Props) => {
 
   if (data && data.items) {
     return (
-      <ImageList variant="masonry" cols={3} gap={8}>
-        {data.items.map((item) => (
-          <ImageListItem key={item.uuid}>
-            <img
-              srcSet={`${item.image_url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.uuid}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={
-                <Chip
-                  label={item.status}
-                  color={item.status === "FAILED" ? "error" : "info"}
-                />
-              }
-              position="below"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
+      <>
+        <Typography variant="h6" mb={2}>
+          Results
+        </Typography>
+        <ImageList variant="masonry" cols={3} gap={8}>
+          {data.items.map((item) => (
+            <ImageListItem key={item.uuid}>
+              <img
+                srcSet={`${item.image_url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={item.uuid}
+                loading="lazy"
+              />
+              <ImageListItemBar
+                title={
+                  <Chip
+                    label={item.status}
+                    color={item.status === "FAILED" ? "error" : "info"}
+                  />
+                }
+                position="below"
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </>
     );
   }
 };
