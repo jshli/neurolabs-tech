@@ -29,10 +29,10 @@ npm run test
 
 Storybook + MSW + React Testing Library + an OpenAPI schema is a great way to build components in isolation, providing a demo playground for non-technical users while also offering a powerful testing suite. This approach is especially effective when combined with Chromatic (not implemented yet).>Storybook + MSW + React Testing Library + an OpenAPI schema is a great way to build components in isolation, providing a demo playground for non-technical users, while also providing a powerful testing suite, especially when combined with Chromatic (not implemented).
 
-The goal is to:
+The goals are to:
 
-- Use Storybook + MSW to build components in isolation, while using imported OpenAPI schemas to ensure type safety
-- Use Storybook + React Testing Library for integration/unit testing. By importing and rendering the Story itself, this reduces duplication in writing the unit tests itself. We can also use the Story 'play' function to mimic user interaction, which allows the engineer to see the component in action in Storybook, while also doubling up as an automated integration test.
+- Use Storybook + MSW to build components in isolation, using imported OpenAPI schemas to ensure type safety.
+- Use Storybook + React Testing Library for integration/unit testing. By importing and rendering the Story itself, this reduces duplication in writing the unit tests. We can also use the Story 'play' function to mimic user interaction, allowing the engineer to see the component in action in Storybook while also doubling up as an automated integration test.
 
 A future improvement would be to integrate Chromatic, which would as UI snapshot testing, picking up any visual regressions.
 
