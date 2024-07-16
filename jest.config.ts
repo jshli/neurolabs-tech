@@ -10,6 +10,7 @@ const createJestConfig = nextJest({
 const config: Config = {
   testEnvironment: "jsdom",
   // Add more setup options before each test is run
+  setupFiles: ["./jest.polyfills.js"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
 };
 

@@ -1,7 +1,6 @@
 "use client";
 import { usePostIRImage } from "@/hooks/usePostIRImage";
 import { Box, Button, Grid, SvgIcon, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
