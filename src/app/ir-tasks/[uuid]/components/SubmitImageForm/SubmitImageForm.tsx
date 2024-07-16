@@ -81,7 +81,11 @@ export const SubmitImageForm = ({ taskUUID }: Props) => {
         )}
       />
       <div className="mb-8">
-        <Button variant="contained" type="submit">
+        <Button
+          variant="contained"
+          type="submit"
+          disabled={!watchImages || watchImages.length === 0}
+        >
           {isPending ? "Submitting..." : "Submit"}
         </Button>
       </div>
