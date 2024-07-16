@@ -1,21 +1,29 @@
+import { usePostIRImage } from "@/hooks/usePostIRImage";
 import { Box, Button, Grid, SvgIcon, Typography } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-export const SubmitImageForm = () => {
+type Props = {
+  taskUUID: string;
+};
+export const SubmitImageForm = ({ taskUUID }: Props) => {
   const {
     register,
     control,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm<{ images: File[] }>();
+  const { isPending, mutate } = usePostIRImage(taskUUID);
 
   const watchImages = watch("images");
 
-  const onSubmit = (data) => { };
+  const onSubmit: SubmitHandler<{ images: File[] }> = (data, event) => {
+    event?.preventDefault();
+    mutate(data.images);
+  };
 
   return (
-    <form onSubmit={ }>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {watchImages && watchImages.length > 0 && (
         <Box mt={2}>
           <Typography variant="h6">Selected Images:</Typography>
@@ -75,7 +83,9 @@ export const SubmitImageForm = () => {
           </>
         )}
       />
-      <input type="submit" />
+      <Button variant="contained" type="submit">
+        {isPending ? "Submitting..." : "Submit"}
+      </Button>
     </form>
   );
 };

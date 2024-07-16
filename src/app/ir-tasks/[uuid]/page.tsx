@@ -22,7 +22,7 @@ const Page = ({ params }: { params: { uuid: string } }) => {
         <Typography variant="h5" component="h2" mb={2} mt={4}>
           {data?.name}
         </Typography>
-        <SubmitImageForm />
+        <SubmitImageForm taskUUID={params.uuid} />
       </Container>
     </main>
   );
