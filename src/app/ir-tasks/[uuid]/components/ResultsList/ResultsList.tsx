@@ -4,7 +4,6 @@ import {
   ImageList,
   ImageListItem,
   ImageListItemBar,
-  Typography,
 } from "@mui/material";
 
 type Props = {
@@ -23,9 +22,6 @@ export const ResultsList = ({ taskId }: Props) => {
   if (data && data.items) {
     return (
       <>
-        <Typography variant="h6" mb={2}>
-          Results
-        </Typography>
         <ImageList variant="masonry" cols={3} gap={8}>
           {data.items.map((item) => (
             <ImageListItem key={item.uuid}>

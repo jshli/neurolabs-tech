@@ -7,8 +7,6 @@ import { ResultsList } from "./components/ResultsList/ResultsList";
 const Page = ({ params }: { params: { uuid: string } }) => {
   const { isPending, isError, data } = useGetIRTaskById(params.uuid);
 
-  // TODO: get pending results for item
-
   if (isPending) {
     return <p>Loading...</p>;
   }
@@ -24,6 +22,10 @@ const Page = ({ params }: { params: { uuid: string } }) => {
           {data?.name}
         </Typography>
         <SubmitImageForm taskUUID={params.uuid} />
+
+        <Typography variant="h6" mb={2}>
+          Results
+        </Typography>
         <ResultsList taskId={params.uuid} />
       </Container>
     </main>
