@@ -25,9 +25,9 @@ npm run test-storybook
 npm run test
 ```
 
-### Motivation
+### Motivation for Storybook
 
-<orybook + MSW + React Testing Library + an OpenAPI schema is a great way to build components in isolation, providing a demo playground for non-technical users while also offering a powerful testing suite. This approach is especially effective when combined with Chromatic (not implemented yet).>Storybook + MSW + React Testing Library + an OpenAPI schema is a great way to build components in isolation, providing a demo playground for non-technical users, while also providing a powerful testing suite, especially when combined with Chromatic (not implemented).
+Storybook + MSW + React Testing Library + an OpenAPI schema is a great way to build components in isolation, providing a demo playground for non-technical users while also offering a powerful testing suite. This approach is especially effective when combined with Chromatic (not implemented yet).>Storybook + MSW + React Testing Library + an OpenAPI schema is a great way to build components in isolation, providing a demo playground for non-technical users, while also providing a powerful testing suite, especially when combined with Chromatic (not implemented).
 
 The goal is to:
 
