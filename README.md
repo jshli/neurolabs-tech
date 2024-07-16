@@ -46,6 +46,5 @@ A future improvement would be to integrate Chromatic, which would add UI snapsho
 
 ## What next
 
-- Tests. While using Storybook + MSW may have been 'overkill' for a small PoC, I wanted to demonstrate my favourite approach to front-end testing. I ran into some integration issues that unfortunately was taking too long to resolve, so my unit tests aren't nearly as thorough as I'd like them to be. However, I hope they serve as a good demonstration of the approach, and I'd love the opportunity to walk more through the approach in person
 - Form validation
 - Better organisation of types/mocks
