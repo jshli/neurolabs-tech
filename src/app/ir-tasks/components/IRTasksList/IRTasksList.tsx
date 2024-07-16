@@ -1,10 +1,9 @@
 import { useGetIRTasks } from "@/hooks/useGetIRTasks";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { List, ListItemButton, ListItemText } from "@mui/material";
 
 export const IRTasksList = () => {
   const { isPending, isError, data, error } = useGetIRTasks();
 
-  console.log("is error", isError, data, error);
   if (isPending) {
     return <p>Loading...</p>;
   }
@@ -15,9 +14,13 @@ export const IRTasksList = () => {
 
   if (data && data.items) {
     return (
-      <Grid container spacing={2}>
-        {data?.items.map((item) => <p key={item.uuid}>{item.name}</p>)}
-      </Grid>
+      <List>
+        {data?.items.map((item) => (
+          <ListItemButton key={item.uuid}>
+            <ListItemText primary={item.name} />
+          </ListItemButton>
+        ))}
+      </List>
     );
   }
   return null;
