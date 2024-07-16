@@ -1,6 +1,7 @@
 "use client";
 import { usePostIRImage } from "@/hooks/usePostIRImage";
 import { Box, Button, Grid, SvgIcon, Typography } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 export const SubmitImageForm = ({ taskUUID }: Props) => {
   const { control, handleSubmit, watch, reset } = useForm<{ images: File[] }>();
   const { isPending, mutateAsync } = usePostIRImage(taskUUID);
+  const queryClient = useQueryClient();
 
   const watchImages = watch("images");
 
@@ -16,6 +18,9 @@ export const SubmitImageForm = ({ taskUUID }: Props) => {
     event?.preventDefault();
     await mutateAsync(data.images).then(() => {
       reset();
+      queryClient.invalidateQueries({
+        queryKey: ["ir-task-results", taskUUID],
+      });
     });
   };
 
