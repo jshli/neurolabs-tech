@@ -29,6 +29,7 @@ export const ResultsList = ({ taskId }: Props) => {
       <List>
         {data.items.map((item) => (
           <ListItem
+            key={item.uuid}
             secondaryAction={
               <Chip
                 label={item.status}
