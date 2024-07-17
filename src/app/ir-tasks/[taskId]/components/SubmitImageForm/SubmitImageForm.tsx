@@ -5,11 +5,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
-  taskUUID: string;
+  taskId: string;
 };
-export const SubmitImageForm = ({ taskUUID }: Props) => {
+export const SubmitImageForm = ({ taskId }: Props) => {
   const { control, handleSubmit, watch, reset } = useForm<{ images: File[] }>();
-  const { isPending, mutateAsync } = usePostIRImage(taskUUID);
+  const { isPending, mutateAsync } = usePostIRImage(taskId);
   const queryClient = useQueryClient();
 
   const watchImages = watch("images");
@@ -19,7 +19,7 @@ export const SubmitImageForm = ({ taskUUID }: Props) => {
     await mutateAsync(data.images).then(() => {
       reset();
       queryClient.invalidateQueries({
-        queryKey: ["ir-task-results", taskUUID],
+        queryKey: ["ir-task-results", taskId],
       });
     });
   };

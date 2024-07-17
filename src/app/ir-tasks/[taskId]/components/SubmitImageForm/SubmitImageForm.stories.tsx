@@ -25,6 +25,6 @@ export const Default: Story = {
     },
   },
   args: {
-    taskUUID: "123abc",
+    taskId: "123abc",
   },
 };

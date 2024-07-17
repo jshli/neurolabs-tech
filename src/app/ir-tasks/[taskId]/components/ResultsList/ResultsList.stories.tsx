@@ -21,6 +21,9 @@ type Story = StoryObj<typeof ResultsList>;
 
 export const Default: Story = {
   parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
     msw: {
       ...handlers,
     },

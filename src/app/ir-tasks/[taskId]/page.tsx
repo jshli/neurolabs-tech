@@ -21,7 +21,7 @@ const Page = ({ params }: { params: { taskId: string } }) => {
         <Typography variant="h5" component="h2" mb={2} mt={4}>
           {data?.name}
         </Typography>
-        <SubmitImageForm taskUUID={params.taskId} />
+        <SubmitImageForm taskId={params.taskId} />
 
         <Typography variant="h6" mb={2}>
           Results

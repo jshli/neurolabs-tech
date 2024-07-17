@@ -2,15 +2,15 @@ import { useMutation } from "@tanstack/react-query";
 import { paths } from "../../schema";
 
 const postIRImage = async ({
-  taskUUID,
+  taskId,
   images,
 }: {
-  taskUUID: string;
+  taskId: string;
   images: File[];
 }): Promise<
   paths["/image-recognition/tasks/{task_uuid}/images"]["post"]["responses"]["200"]["content"]["application/json"]
 > => {
-  const url = `/api/image-recognition/tasks/${taskUUID}/images`;
+  const url = `/api/image-recognition/tasks/${taskId}/images`;
   const formData = new FormData();
 
   for (let i = 0; i < images.length; i++) {
@@ -29,9 +29,9 @@ const postIRImage = async ({
   return response.json();
 };
 
-export const usePostIRImage = (taskUUID: string) => {
+export const usePostIRImage = (taskId: string) => {
   const { mutateAsync, isSuccess, isPending } = useMutation({
-    mutationFn: (images: File[]) => postIRImage({ taskUUID, images }),
+    mutationFn: (images: File[]) => postIRImage({ taskId, images }),
   });
   return { mutateAsync, isPending, isSuccess };
 };
