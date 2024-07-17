@@ -4,8 +4,8 @@ import { Container, Typography } from "@mui/material";
 import { SubmitImageForm } from "./components/SubmitImageForm/SubmitImageForm";
 import { ResultsList } from "./components/ResultsList/ResultsList";
 
-const Page = ({ params }: { params: { uuid: string } }) => {
-  const { isPending, isError, data } = useGetIRTaskById(params.uuid);
+const Page = ({ params }: { params: { taskId: string } }) => {
+  const { isPending, isError, data } = useGetIRTaskById(params.taskId);
 
   if (isPending) {
     return <p>Loading...</p>;
@@ -21,12 +21,12 @@ const Page = ({ params }: { params: { uuid: string } }) => {
         <Typography variant="h5" component="h2" mb={2} mt={4}>
           {data?.name}
         </Typography>
-        <SubmitImageForm taskUUID={params.uuid} />
+        <SubmitImageForm taskUUID={params.taskId} />
 
         <Typography variant="h6" mb={2}>
           Results
         </Typography>
-        <ResultsList taskId={params.uuid} />
+        <ResultsList taskId={params.taskId} />
       </Container>
     </main>
   );
