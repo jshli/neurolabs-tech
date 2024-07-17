@@ -9,25 +9,27 @@ const SubmitImageForm = composeStory(Default, Meta);
 
 server.listen();
 const fetchSpy = jest.spyOn(global, "fetch");
+userEvent.setup();
+global.URL.createObjectURL = jest.fn();
 
-test("the button is disabled if no images picked", async () => {
-  await SubmitImageForm.load();
-  render(<SubmitImageForm />);
-  expect(screen.getByRole("button", { name: "Submit" })).toBeDisabled();
-});
+describe("Submit image form", () => {
+  beforeEach(async () => {
+    await SubmitImageForm.load();
+    render(<SubmitImageForm />);
+  });
 
-test("it fires the post request if file uploaded", async () => {
-  userEvent.setup();
-  global.URL.createObjectURL = jest.fn();
+  it("disables the buttons when there's no files selected", async () => {
+    expect(screen.getByRole("button", { name: "Submit" })).toBeDisabled();
+  });
 
-  const file = new File(["hello"], "hello.png", { type: "image/png" });
+  it(" fires the post request if file uploaded", async () => {
+    const file = new File(["hello"], "hello.png", { type: "image/png" });
 
-  await SubmitImageForm.load();
-  render(<SubmitImageForm />);
-  await userEvent.upload(
-    screen.getByLabelText("Upload a new image to process"),
-    file,
-  );
-  userEvent.click(screen.getByRole("button", { name: "Submit" }));
-  waitFor(() => expect(fetchSpy).toHaveBeenCalled());
+    await userEvent.upload(
+      screen.getByLabelText("Upload a new image to process"),
+      file,
+    );
+    userEvent.click(screen.getByRole("button", { name: "Submit" }));
+    waitFor(() => expect(fetchSpy).toHaveBeenCalled());
+  });
 });

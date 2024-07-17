@@ -8,11 +8,16 @@ const IRTasksList = composeStory(Default, Meta);
 
 server.listen();
 
-test("renders the correct data", async () => {
-  await IRTasksList.load();
-  render(<IRTasksList />);
-  expect(screen.getByText("Loading...")).toBeVisible();
-  await waitFor(() => {
-    expect(screen.getByRole("link", { name: "Task Title 1" })).toBeVisible();
+describe("Image Recognition Tasks list", () => {
+  beforeEach(async () => {
+    await IRTasksList.load();
+    render(<IRTasksList />);
+  });
+
+  it("shows the IR Task title", async () => {
+    expect(screen.getByText("Loading...")).toBeVisible();
+    await waitFor(() => {
+      expect(screen.getByRole("link", { name: "Task Title 1" })).toBeVisible();
+    });
   });
 });
